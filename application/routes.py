@@ -24,7 +24,6 @@ def productmovement():
             else:
                 result['movement_id']="MID"+str(int(movement_list[-1]['movement_id'][3:])+1).zfill(4)
             result['timestamp']=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            print(result)
             del result['action']
             db.ProductMovement.insert(result)
             return redirect("/")
@@ -116,7 +115,6 @@ def balancereport():
             else:
                 grand[tol][product_id]=int(qty)
                 grand[froml][product_id]=int(grand[froml][product_id])-int(qty)
-    print(grand,location_list)
     return render_template('BalanceReport.html',grand=grand,location_list=location_list)
 
 '''
