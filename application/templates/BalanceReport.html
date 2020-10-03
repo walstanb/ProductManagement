@@ -1,0 +1,65 @@
+{% extends "includes/master.html" %}
+{% block content %}
+
+<title>Balance Report</title>
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+<style>
+button{
+    cursor: context-menu; 
+    border: 0px solid #3498db; 
+    background-color: transparent;
+}
+</style>
+
+<script>
+function toggleLine(c1) {
+   var els = document.getElementsByClassName(c1);
+   for(var i=0; i<els.length; ++i){
+      var s = els[i].style;
+      s.display = s.display==='none' ? 'block' : 'none';
+   };
+}
+</script>
+
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<div class="container">
+        <div class="row py-3">
+            <div class="col-sm-12"><h2>Balance <b>Report</b></h2></div>
+        </div>
+</div>
+<div class="container">
+{% for location in location_list %}
+    <div class="row py-3">
+        <div class="col-sm-12"><h5>LOCATION ID: {{location['location_id']}}</h5></div>
+    </div>
+    {% if grand[location['location_id']] %}
+    <table class="table table-striped">
+    <tr>
+    <th>Product ID</th>
+    <th>Quantity</th>
+    <tr>
+        {% for prod_id in grand[location['location_id']].keys()%}
+            <tr>
+            <td>{{prod_id}}</td>
+            <td>{{grand[location['location_id']][prod_id]}}</td>
+            <tr/>
+        {%endfor%}
+    {% else %}
+        <table class="table table-striped">
+        <tr>
+            <td>Warehouse Empty</td>
+        </tr>
+        </table>
+    {% endif %}
+    </table>
+
+{%endfor%}
+</div>
+
+
+
+
+{% endblock %}

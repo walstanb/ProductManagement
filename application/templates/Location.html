@@ -1,0 +1,60 @@
+{% extends "includes/master.html" %}
+{% block content %}
+
+<title>Location</title>
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+<style>
+button{
+    cursor: context-menu; 
+    border: 0px solid #3498db; 
+    background-color: transparent;
+}
+</style>
+
+<script>
+function toggleLine(c1) {
+   var els = document.getElementsByClassName(c1);
+   for(var i=0; i<els.length; ++i){
+      var s = els[i].style;
+      s.display = s.display==='none' ? 'block' : 'none';
+   };
+}
+</script>
+
+
+<div class="container">
+            <div class="table-title">
+                <div class="row py-3">
+                    <div class="col-sm-8"><h2>Location <b>Details</b></h2></div>
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Location Id</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for li in location_list %}
+                    <tr>
+                        <form action="" method="POST" id="form-{{li['location_id']}}">
+                        <td><div class="edit-div edit-{{li['location_id']}}">{{ li['location_id'] }}</div>
+                        <div class="edit-div edit-{{li['location_id']}}" style="display: none;" ><input class="form-control" form="form-{{li['location_id']}}" name="location_id"  type="text" value="{{li['location_id']}}" required></div></td>
+                        <td><div class="edit-div edit-{{li['location_id']}}"><span onclick="toggleLine('edit-{{li['location_id']}}');"><i class="far fa-edit"></i></span> <input form="form-{{li['location_id']}}" type="hidden" name="x-id" value="{{li['location_id']}}"> <button type="submit" form="form-{{li['location_id']}}" name="action" value="delete"><i class="fas fa-trash"></i></button></div>
+                        <div class="edit-div edit-{{li['location_id']}}" style="display: none;" ><button type="submit" form="form-{{li['location_id']}}" name="action" value="update"><i class="fas fa-check"></i></button> <span onclick="toggleLine('edit-{{li['location_id']}}');"><i class="fas fa-times"></i></span></div></td>
+                        </form>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <form action="" id="newentry" method="POST">
+                        <td><input form="newentry" class="form-control" name="location_id" type="text" required>
+                        <td><button form="newentry" type="submit" name="action" value="new"><i class="fas fa-plus"></i></button></td>
+                        </form>
+                    </tr>
+                </tbody>
+            </table>
+</div>
+
+{% endblock %}

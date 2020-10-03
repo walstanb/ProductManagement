@@ -1,0 +1,126 @@
+{% extends "includes/master.html" %}
+{% block content %}
+
+<title>Product Movement</title>
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+<style>
+button{
+    cursor: context-menu; 
+    border: 0px solid #3498db; 
+    background-color: transparent;
+}
+</style>
+
+<script>
+function toggleLine(c1) {
+   var els = document.getElementsByClassName(c1);
+   for(var i=0; i<els.length; ++i){
+      var s = els[i].style;
+      s.display = s.display==='none' ? 'block' : 'none';
+   };
+}
+</script>
+
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<div class="container-fluid" id="proddiv">
+        <div class="row py-3">
+            <div class="col-sm-12"><h2>Move <b>Product</b></h2></div>
+        </div>
+        <form action="" method="post">
+        <div class="row">
+            <div class="col-sm-2">
+            <label for="sel1">Product</label>
+            <select class="form-control" id="sel1" name="product_id">
+                {% for li in product_list %}
+                <option>{{li['product_id']}}</option>
+                {% endfor %}
+            </select>
+            </div>
+            <div class="col-sm-2">
+            <label for="sel2">From Location</label>
+            <select class="form-control" id="sel2" name="from_location">
+                <option></option>
+                {% for li in location_list %}
+                <option>{{li['location_id']}}</option>
+                {%endfor%}
+            </select>
+            </div>
+            <div class="col-sm-2">
+            <label for="sel3">To Location</label>
+            <select class="form-control" id="sel3" name="to_location">
+                <option></option>
+                {% for li in location_list %}
+                <option>{{li['location_id']}}</option>
+                {%endfor%}
+            </select>
+            </div>
+            <div class="col-sm-2">
+            <label for="sel4">Quantity</label>
+            <input class="form-control" type="number" name="qty" value="1">
+            </div>
+        
+            <div class="col-sm-2 align-self-end"><button class="btn btn-primary" type="submit" name="action" value="new">Move Product</button></div>
+        </div>
+        </form>
+</div>
+
+
+<div class="container-fluid" id="proddiv">
+        <div class="row py-3">
+            <div class="col-sm-12"><h2>Movement <b>Details</b></h2></div>
+        </div>
+        <div class="row">
+        <div class="col-sm-12">
+        <div class="table-responsive">
+        <div class="table-wrapper">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>movement_id</th>
+                    <th>timestamp</th>
+                    <th>from_location</th>
+                    <th>to_location</th>
+                    <th>product_id</th>
+                    <th>qty</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for li in movement_list %}
+                <tr>
+                    <form action="/ProductMovement" method="POST" id="form-{{li['movement_id']}}">
+                    
+                    <td><div class="edit-div edit-{{li['movement_id']}}">{{ li['movement_id'] }}</div>
+                    <div class="edit-div edit-{{li['movement_id']}}" style="display: none;" ><input class="form-control"form="form-{{li['movement_id']}}" name="movement_id" type="text" value="{{li['movement_id']}}"></div></td>
+                    
+                    <td><div class="edit-div edit-{{li['movement_id']}}">{{ li['timestamp'] }}</div>
+                    <div class="edit-div edit-{{li['movement_id']}}" style="display: none;" ><input class="form-control" form="form-{{li['movement_id']}}" name="timestamp"  type="text" value="{{li['timestamp']}}"></div></td>
+
+                    <td><div class="edit-div edit-{{li['movement_id']}}">{{ li['from_location'] }}</div>
+                    <div class="edit-div edit-{{li['movement_id']}}" style="display: none;" ><input class="form-control" form="form-{{li['movement_id']}}" name="from_location"  type="text" value="{{li['from_location']}}"></div></td>
+
+                    <td><div class="edit-div edit-{{li['movement_id']}}">{{ li['to_location'] }}</div>
+                    <div class="edit-div edit-{{li['movement_id']}}" style="display: none;" ><input class="form-control" form="form-{{li['movement_id']}}" name="to_location"  type="text" value="{{li['to_location']}}"></div></td>
+
+                    <td><div class="edit-div edit-{{li['movement_id']}}">{{ li['product_id'] }}</div>
+                    <div class="edit-div edit-{{li['movement_id']}}" style="display: none;" ><input class="form-control" form="form-{{li['movement_id']}}" name="product_id"  type="text" value="{{li['product_id']}}"></div></td>
+
+                    <td><div class="edit-div edit-{{li['movement_id']}}">{{ li['qty'] }}</div>
+                    <div class="edit-div edit-{{li['movement_id']}}" style="display: none;" ><input class="form-control" form="form-{{li['movement_id']}}" name="qty"  type="number" value="{{li['qty']}}"></div></td>
+                    
+                    <td><div class="edit-div edit-{{li['movement_id']}}"><span onclick="toggleLine('edit-{{li['movement_id']}}');"><i class="far fa-edit"></i></span> <input form="form-{{li['movement_id']}}" type="hidden" name="x-id" value="{{li['movement_id']}}"> <button type="submit" form="form-{{li['movement_id']}}" name="action" value="delete"><i class="fas fa-trash"></i></button></div>
+                    <div class="edit-div edit-{{li['movement_id']}}" style="display: none;" ><button type="submit" form="form-{{li['movement_id']}}" name="action" value="update"><i class="fas fa-check"></i></button> <span onclick="toggleLine('edit-{{li['movement_id']}}');"><i class="fas fa-times"></i></span></div></td>
+                    
+                    </form>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div></div>
+        </div></div>
+</div>
+
+{% endblock %}
