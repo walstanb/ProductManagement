@@ -37,7 +37,6 @@ Get product balance in each Location in a grid view, with 3 columns: `Product`, 
 pip3 install -r requirements.txt
 ```
 **Execution:**  
-For Windows
 ```
 venv\Scripts\activate
 python -m flask run
