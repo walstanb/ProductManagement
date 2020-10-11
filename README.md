@@ -1,7 +1,7 @@
 
 # Inventory Management Web Application
 
-The goal is to create a web application using Flask framework to manage inventory of a list of products in respective warehouses. Imagine this application will be used in a shop or a warehouse that needs to keep track of various products and various locations.
+*The goal is to create a web application using Flask framework to manage inventory of a list of products in respective warehouses. Imagine this application will be used in a shop or a warehouse that needs to keep track of various products and various locations.*
 
 The application should cover following functionalities:
 
@@ -32,6 +32,16 @@ Move `Product A` from `Location X` to `Location Y`
 
 Get product balance in each Location in a grid view, with 3 columns: `Product`, `Warehouse`, `Qty`  
 
+**Installation:**  
+```
+pip3 install -r requirements.txt
+```
+**Execution:**  
+For Windows
+```
+venv\Scripts\activate
+python -m flask run
+```
 
 ## ProductManagement
 
