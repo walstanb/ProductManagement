@@ -32,13 +32,33 @@ Move `Product A` from `Location X` to `Location Y`
 
 Get product balance in each Location in a grid view, with 3 columns: `Product`, `Warehouse`, `Qty`  
 
-**Installation:**  
+**Setup a Virtual Enviorment for your system**
+```
+python -m venv env
+```
+
+**Activate Virtual Enviorment**
+
+- For Windows 
+```
+env\Scripts\activate
+```
+- For Linux
+```
+source env\bin\activate
+```
+
+**Installing dependencies:**  
 ```
 pip3 install -r requirements.txt
 ```
+
 **Execution:**  
 ```
-venv\Scripts\activate
+flask run
+```
+or
+```
 python -m flask run
 ```
 
